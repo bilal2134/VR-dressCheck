@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AvatarCanvas from '../three/AvatarCanvas';
 
 const HeroSection = () => {
-  const [scale, setScale] = useState(4);
+  const [scale, setScale] = useState(1.8);
   const modelRef = useRef();
 
   // Remove parallax effect since model is no longer background
@@ -40,7 +40,7 @@ const HeroSection = () => {
             Get Started
           </button>
         </Link>
-        <div ref={modelRef} className="flex flex-col items-center w-full" style={{ minHeight: 400 }}>
+        <div ref={modelRef} className="flex flex-col items-center w-full" style={{ minHeight: 550 }}>
           <AvatarCanvas scale={scale} modelPath="/avatar.glb" position={[0, 0, 0]} />
           <span className="text-gray-400 text-xs mt-2">Scroll to resize avatar</span>
         </div>
