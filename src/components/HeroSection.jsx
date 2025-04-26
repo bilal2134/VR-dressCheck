@@ -40,8 +40,8 @@ const HeroSection = () => {
             Get Started
           </button>
         </Link>
-        <div ref={modelRef} className="flex flex-col items-center w-full" style={{ minHeight: 320 }}>
-          <AvatarCanvas scale={scale} />
+        <div ref={modelRef} className="flex flex-col items-center w-full" style={{ minHeight: 400 }}>
+          <AvatarCanvas scale={scale} modelPath="/avatar.glb" position={[0, 0, 0]} />
           <span className="text-gray-400 text-xs mt-2">Scroll to resize avatar</span>
         </div>
       </div>

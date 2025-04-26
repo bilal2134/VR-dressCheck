@@ -5,7 +5,6 @@ import LandingPage from './pages/LandingPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import CustomCursor from './components/CustomCursor';
-import DraggableAvatar from './components/DraggableAvatar';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -19,7 +18,6 @@ function App() {
   return (
     <>
       <CustomCursor />
-      <DraggableAvatar />
       <div className="min-h-screen bg-gray-900">
         <Router>
           <Routes>

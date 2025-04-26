@@ -24,8 +24,8 @@ const SignupPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-blue-200 py-12 px-4">
       <div className="bg-white rounded-2xl shadow-xl flex flex-col md:flex-row w-full max-w-4xl overflow-hidden">
         <div className="md:w-1/2 flex flex-col items-center justify-center p-8 bg-gradient-to-br from-indigo-50 to-blue-100">
-          <div className="w-40 h-40 mb-6">
-            <AvatarCanvas />
+          <div className="w-72 mx-auto flex items-center justify-center" style={{height: 320, marginTop: 40}}>
+            <AvatarCanvas scale={1.2} modelPath="/avatar2.glb" position={[0, -1.2, 0]} />
           </div>
           <div className="text-center">
             <h2 className="text-2xl font-bold text-indigo-700 mb-2">Create Your Account</h2>
