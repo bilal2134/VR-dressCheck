@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { GoogleIcon, FacebookIcon } from '../assets/SocialIcons'; // You will need to create these SVG icon components or use inline SVGs
 import { Link } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../firebase';
 
 const LoginPage = () => {
   const [form, setForm] = useState({
@@ -17,6 +19,16 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: Integrate with authentication backend
+  };
+
+  // Add this function for Google login
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      // Optionally redirect or update UI here
+    } catch (error) {
+      alert('Google sign-in failed: ' + error.message);
+    }
   };
 
   return (
@@ -66,7 +78,7 @@ const LoginPage = () => {
             <span className="mx-2 text-gray-400 text-sm">or</span>
             <div className="flex-grow h-px bg-gray-200" />
           </div>
-          <button type="button" className="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition">
+          <button type="button" className="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition" onClick={handleGoogleLogin}>
             <GoogleIcon className="w-5 h-5" /> Log in with Google
           </button>
           <button type="button" className="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition">
