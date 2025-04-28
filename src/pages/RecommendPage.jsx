@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { jsPDF } from 'jspdf';
+import { FaRobot } from 'react-icons/fa'; // Import the robot icon
 
 const measurementFields = [
   { key: 'clothing_type', label: 'Clothing type (or leave blank for all types)' },
@@ -125,9 +126,14 @@ export default function RecommendPage() {
         </div>
         <div className="space-y-4 mb-6">
           {chat.map((msg, i) => (
-            <div key={i} className={`flex ${msg.from === 'bot' ? 'justify-start' : 'justify-end'}`}>
+            <div key={i} className={`flex items-end gap-2 ${msg.from === 'bot' ? 'justify-start' : 'justify-end'}`}>
+              {msg.from === 'bot' && (
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white flex-shrink-0">
+                  <FaRobot size={18} />
+                </div>
+              )}
               <div 
-                className={`rounded-2xl px-4 py-2 max-w-[85%] ${
+                className={`rounded-2xl px-4 py-2 max-w-[75%] ${
                   msg.from === 'bot' 
                     ? 'bg-gray-700 text-white rounded-tl-none' 
                     : 'bg-primary text-white rounded-tr-none'
@@ -135,6 +141,11 @@ export default function RecommendPage() {
               >
                 {msg.text}
               </div>
+              {msg.from === 'user' && (
+                <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center text-white font-bold flex-shrink-0">
+                  You
+                </div>
+              )}
             </div>
           ))}
         </div>
