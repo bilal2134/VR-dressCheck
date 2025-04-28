@@ -36,7 +36,7 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4">
       <div className="bg-gray-800 rounded-2xl shadow-xl w-full max-w-md p-8">
-        <h2 className="text-2xl font-bold text-primary mb-2 text-center">Log In to FitCheck</h2>
+        <h2 className="text-2xl font-bold text-white mb-2 text-center">Log In to FitCheck</h2>
         <form className="flex flex-col gap-4 mt-6" onSubmit={handleSubmit}>
           <input
             type="email"

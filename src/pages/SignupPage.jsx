@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { GoogleIcon, FacebookIcon } from '../assets/SocialIcons';
 import AvatarCanvas from '../three/AvatarCanvas';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../firebase';
 
 const SignupPage = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -18,6 +21,17 @@ const SignupPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: Integrate with authentication backend
+  };
+
+  // Handle Google signup with redirect
+  const handleGoogleSignup = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      // Redirect to home page after successful signup
+      navigate('/');
+    } catch (error) {
+      alert('Google sign-up failed: ' + error.message);
+    }
   };
 
   return (
@@ -79,7 +93,11 @@ const SignupPage = () => {
             <span className="mx-2 text-gray-400 text-sm">or</span>
             <div className="flex-grow h-px bg-gray-700" />
           </div>
-          <button type="button" className="flex items-center justify-center gap-2 border border-gray-700 rounded-lg py-2 hover:bg-gray-700 transition text-white">
+          <button 
+            type="button" 
+            className="flex items-center justify-center gap-2 border border-gray-700 rounded-lg py-2 hover:bg-gray-700 transition text-white"
+            onClick={handleGoogleSignup}
+          >
             <GoogleIcon className="w-5 h-5" /> Sign up with Google
           </button>
           <button type="button" className="flex items-center justify-center gap-2 border border-gray-700 rounded-lg py-2 hover:bg-gray-700 transition text-white">
