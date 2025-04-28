@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import RecommendPage from './pages/RecommendPage';
+import TryFitPage from './pages/TryFitPage';
 import CustomCursor from './components/CustomCursor';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/recommend" element={<RecommendPage />} />
+            <Route path="/try-fit" element={<TryFitPage />} />
           </Routes>
         </Router>
       </div>
