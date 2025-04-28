@@ -123,10 +123,18 @@ export default function RecommendPage() {
           <button onClick={handleBackHome} className="text-primary font-semibold">Go Home</button>
           <button onClick={handleGeneratePDF} disabled={!isComplete} className="text-primary font-semibold">Generate PDF</button>
         </div>
-        <div className="space-y-3 mb-6">
+        <div className="space-y-4 mb-6">
           {chat.map((msg, i) => (
-            <div key={i} className={msg.from === 'bot' ? 'text-left text-white' : 'text-right text-white'}>
-              {msg.text}
+            <div key={i} className={`flex ${msg.from === 'bot' ? 'justify-start' : 'justify-end'}`}>
+              <div 
+                className={`rounded-2xl px-4 py-2 max-w-[85%] ${
+                  msg.from === 'bot' 
+                    ? 'bg-gray-700 text-white rounded-tl-none' 
+                    : 'bg-primary text-white rounded-tr-none'
+                }`}
+              >
+                {msg.text}
+              </div>
             </div>
           ))}
         </div>
