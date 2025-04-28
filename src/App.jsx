@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import RecommendPage from './pages/RecommendPage';
 import TryFitPage from './pages/TryFitPage';
+import TryARVRPage from './pages/TryARVRPage';
 import CustomCursor from './components/CustomCursor';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/recommend" element={<RecommendPage />} />
             <Route path="/try-fit" element={<TryFitPage />} />
+            <Route path="/try-arvr" element={<TryARVRPage />} />
           </Routes>
         </Router>
       </div>

@@ -5,6 +5,7 @@ import { db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { jsPDF } from 'jspdf';
 import { FaRobot } from 'react-icons/fa'; // Import the robot icon
+import Header from '../components/Header';
 
 const measurementFields = [
   { key: 'clothing_type', label: 'Clothing type (or leave blank for all types)' },
@@ -118,50 +119,53 @@ export default function RecommendPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center pt-24 px-4">
-      <div className="w-full max-w-lg bg-gray-800 rounded-2xl shadow-lg p-6 relative">
-        <div className="flex justify-between mb-4">
-          <button onClick={handleBackHome} className="text-primary font-semibold">Go Home</button>
-          <button onClick={handleGeneratePDF} disabled={!isComplete} className="text-primary font-semibold">Generate PDF</button>
-        </div>
-        <div className="space-y-4 mb-6">
-          {chat.map((msg, i) => (
-            <div key={i} className={`flex items-end gap-2 ${msg.from === 'bot' ? 'justify-start' : 'justify-end'}`}>
-              {msg.from === 'bot' && (
-                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white flex-shrink-0">
-                  <FaRobot size={18} />
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-900 flex flex-col items-center pt-24 px-4">
+        <div className="w-full max-w-lg bg-gray-800 rounded-2xl shadow-lg p-6 relative">
+          <div className="flex justify-between mb-4">
+            <button onClick={handleBackHome} className="text-primary font-semibold">Go Home</button>
+            <button onClick={handleGeneratePDF} disabled={!isComplete} className="text-primary font-semibold">Generate PDF</button>
+          </div>
+          <div className="space-y-4 mb-6">
+            {chat.map((msg, i) => (
+              <div key={i} className={`flex items-end gap-2 ${msg.from === 'bot' ? 'justify-start' : 'justify-end'}`}>
+                {msg.from === 'bot' && (
+                  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white flex-shrink-0">
+                    <FaRobot size={18} />
+                  </div>
+                )}
+                <div 
+                  className={`rounded-2xl px-4 py-2 max-w-[75%] ${
+                    msg.from === 'bot' 
+                      ? 'bg-gray-700 text-white rounded-tl-none' 
+                      : 'bg-primary text-white rounded-tr-none'
+                  }`}
+                >
+                  {msg.text}
                 </div>
-              )}
-              <div 
-                className={`rounded-2xl px-4 py-2 max-w-[75%] ${
-                  msg.from === 'bot' 
-                    ? 'bg-gray-700 text-white rounded-tl-none' 
-                    : 'bg-primary text-white rounded-tr-none'
-                }`}
-              >
-                {msg.text}
+                {msg.from === 'user' && (
+                  <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center text-white font-bold flex-shrink-0">
+                    You
+                  </div>
+                )}
               </div>
-              {msg.from === 'user' && (
-                <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center text-white font-bold flex-shrink-0">
-                  You
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
+          {!isComplete && (
+            <form onSubmit={e => { e.preventDefault(); handleInput(currentInput); }} className="flex gap-2">
+              <input
+                value={currentInput}
+                onChange={e => setCurrentInput(e.target.value)}
+                autoFocus
+                className="flex-1 px-4 py-2 rounded bg-gray-900 text-white border border-primary focus:outline-none"
+                placeholder={measurementFields[step].label}
+              />
+              <button type="submit" className="bg-primary text-white px-4 py-2 rounded font-semibold">Send</button>
+            </form>
+           )}
         </div>
-        {!isComplete && (
-          <form onSubmit={e => { e.preventDefault(); handleInput(currentInput); }} className="flex gap-2">
-            <input
-              value={currentInput}
-              onChange={e => setCurrentInput(e.target.value)}
-              autoFocus
-              className="flex-1 px-4 py-2 rounded bg-gray-900 text-white border border-primary focus:outline-none"
-              placeholder={measurementFields[step].label}
-            />
-            <button type="submit" className="bg-primary text-white px-4 py-2 rounded font-semibold">Send</button>
-          </form>
-         )}
       </div>
-    </div>
+    </>
   );
 }
