@@ -8,9 +8,9 @@ const navLinks = [
   { name: 'Terms', href: '#' },
 ];
 const socialLinks = [
-  { name: 'Twitter', href: '#', icon: <FaTwitter className="w-7 h-7" /> },
-  { name: 'Instagram', href: '#', icon: <FaInstagram className="w-7 h-7" /> },
-  { name: 'Facebook', href: '#', icon: <FaFacebook className="w-7 h-7" /> },
+  { name: 'Twitter', href: 'https://bilalshakeel-portfolio.vercel.app/', icon: <FaTwitter className="w-7 h-7" /> },
+  { name: 'Instagram', href: 'https://bilalshakeel-portfolio.vercel.app/', icon: <FaInstagram className="w-7 h-7" /> },
+  { name: 'Facebook', href: 'https://bilalshakeel-portfolio.vercel.app/', icon: <FaFacebook className="w-7 h-7" /> },
 ];
 
 const Footer = () => (

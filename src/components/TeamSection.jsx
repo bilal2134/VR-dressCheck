@@ -38,8 +38,8 @@ const TeamSection = () => (
         {team.map((member) => (
           <div key={member.name} className="bg-gray-900 rounded-2xl shadow-md p-6 flex flex-col items-center text-center hover:shadow-xl transition">
             <img src={member.photo} alt={member.name} className="w-20 h-20 rounded-full mb-4 object-cover border-4 border-primary" />
-            <h3 className="text-lg font-semibold text-primary mb-1">{member.name}</h3>
-            <span className="text-primary text-sm mb-2">{member.role}</span>
+            <h3 className="text-lg font-semibold text-white mb-1">{member.name}</h3>
+            <span className="text-white text-sm mb-2">{member.role}</span>
             <p className="text-gray-200 text-sm">{member.bio}</p>
           </div>
         ))}

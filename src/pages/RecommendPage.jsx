@@ -125,7 +125,7 @@ export default function RecommendPage() {
         </div>
         <div className="space-y-3 mb-6">
           {chat.map((msg, i) => (
-            <div key={i} className={msg.from === 'bot' ? 'text-left text-primary' : 'text-right text-white'}>
+            <div key={i} className={msg.from === 'bot' ? 'text-left text-white' : 'text-right text-white'}>
               {msg.text}
             </div>
           ))}
