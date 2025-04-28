@@ -37,7 +37,7 @@ const Header = () => {
           {user ? (
             <>
               <span className="text-white font-semibold">Hi, {user.displayName || user.email}</span>
-              <a href="/recommend" className="px-6 py-2 bg-white text-primary rounded-full font-semibold shadow hover:bg-gray-100 transition">Get Size Recommendation</a>
+              <a href="/recommend" className="px-4 py-1.5 bg-white text-primary rounded-full font-semibold text-sm shadow hover:bg-gray-100 transition">Get Size</a>
               <button onClick={logout} className="px-6 py-2 bg-primary text-white border border-white rounded-full font-semibold shadow hover:bg-primary/80 transition">Logout</button>
             </>
           ) : (
