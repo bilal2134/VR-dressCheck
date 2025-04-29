@@ -73,22 +73,22 @@ export default function RecommendPage() {
       if (!res.ok) throw new Error(`Status ${res.status}`);
       const data = await res.json();
       if (data.recommendations?.length) {
-        // display recommendations immediately
-        const recMsgs = [
-          { from: 'bot', text: 'Here are your top recommendations:' },
-          ...data.recommendations.map(r => ({ from: 'bot', text: `${r.brand} - ${r.clothing_type} - Size: ${r.size} (Match: ${(r.match_quality*100).toFixed(0)}%)` }))
-        ];
+        const top = data.recommendations[0];
+        const summary = `Best match: ${top.brand} ${top.clothing_type} (Size: ${top.size})`;
         setRecommendations(data.recommendations);
-        setChat(prev => ([...prev, ...recMsgs]));
-        // save measurements & recommendations asynchronously
-        setDoc(doc(db, 'users', user.uid), {
-          measurements: cmInputs,
-          recommendations: data.recommendations,
-          updatedAt: new Date().toISOString()
-        }, { merge: true }).catch(err => {
-          console.error('Firestore write error:', err);
-          setChat(prev => ([...prev, { from: 'bot', text: '❌ Error saving to Firestore.' }]));
-        });
+        setChat(prev => ([...prev, { from: 'bot', text: summary }]));
+        // save to Realtime Database asynchronously, but do not let errors affect chat
+        try {
+          const userRef = dbRef(rtdb, `users/${user.uid}`);
+          dbSet(userRef, {
+            measurements: cmInputs,
+            recommendations: data.recommendations,
+            updatedAt: new Date().toISOString()
+          });
+        } catch (err) {
+          console.error('RTDB write error:', err);
+          // Do not show error in chat
+        }
       } else {
         setChat(prev => ([...prev, { from: 'bot', text: 'No recommendations found.' }]));
       }
