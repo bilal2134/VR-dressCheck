@@ -9,11 +9,11 @@ import Header from '../components/Header';
 
 const measurementFields = [
   { key: 'clothing_type', label: 'Clothing type (or leave blank for all types)' },
-  { key: 'shoulder_cm', label: 'Shoulder width (inches)' },
-  { key: 'chest_cm', label: 'Chest/bust (inches)' },
-  { key: 'waist_cm', label: 'Waist (inches)' },
-  { key: 'hip_cm', label: 'Hip (inches)' },
-  { key: 'height_cm', label: 'Height (inches)' },
+  { key: 'shoulder_cm', label: 'Shoulder width (inches)', min: 20, max: 60 },
+  { key: 'chest_cm', label: 'Chest/bust (inches)', min: 70, max: 160 },
+  { key: 'waist_cm', label: 'Waist (inches)', min: 60, max: 140 },
+  { key: 'hip_cm', label: 'Hip (inches)', min: 70, max: 160 },
+  { key: 'height_cm', label: 'Height (inches)', min: 140, max: 210 },
 ];
 
 export default function RecommendPage() {
@@ -28,16 +28,26 @@ export default function RecommendPage() {
   ]);
   const [currentInput, setCurrentInput] = useState('');
   const [isComplete, setIsComplete] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!user) navigate('/login');
   }, [user, navigate]);
 
   const handleInput = async (value) => {
-    // clear input field
     setCurrentInput('');
-    // store answer
+    setError('');
     const field = measurementFields[step];
+    // Validation (skip for clothing_type or empty input)
+    if (value && field.min !== undefined && field.max !== undefined) {
+      const num = parseFloat(value);
+      if (isNaN(num) || num < field.min || num > field.max) {
+        setError(`Please enter a valid ${field.label.toLowerCase()} between ${field.min} and ${field.max}.`);
+        setChat(prev => ([...prev, { from: 'bot', text: `❌ Invalid input. ${field.label} must be between ${field.min} and ${field.max}.` }]));
+        return;
+      }
+    }
+    // store answer
     setInputs(prev => ({ ...prev, [field.key]: value }));
     // append user message
     setChat(prev => ([...prev, { from: 'user', text: value || '(skipped)' }]));
@@ -154,6 +164,9 @@ export default function RecommendPage() {
           </div>
           {!isComplete && (
             <form onSubmit={e => { e.preventDefault(); handleInput(currentInput); }} className="flex gap-2">
+              {error && (
+                <div className="text-red-400 mb-2 text-sm">{error}</div>
+              )}
               <input
                 value={currentInput}
                 onChange={e => setCurrentInput(e.target.value)}
