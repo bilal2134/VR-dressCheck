@@ -1,22 +1,22 @@
 import shammo1 from '../assets/dp.png';
-import shammo2 from '../assets/dp.png';
-import shammo3 from '../assets/dp.png';
+import Talal from '../assets/Talal.png';
+import Shammo from '../assets/shammo4.png';
 
 const testimonials = [
   {
-    name: 'Ava R.',
+    name: 'Bilal Shakeel',
     quote: 'FitCheck let me try on dozens of outfits in minutes. The avatar looks just like me!',
     avatar: shammo1,
   },
   {
-    name: 'Liam S.',
+    name: 'Talal Rizvi',
     quote: 'I finally found jeans that fit perfectly. No more returns!',
-    avatar: shammo2,
+    avatar: Talal,
   },
   {
-    name: 'Sophia M.',
+    name: 'Shahmeer',
     quote: 'The 3D preview is so realistic. Shopping online is fun again!',
-    avatar: shammo3,
+    avatar: Shammo,
   },
 ];
 

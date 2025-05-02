@@ -6,25 +6,25 @@ import Shahroze from '../assets/Shahroze.png';
 const team = [
   {
     name: 'Shahmeer Ahmed',
-    role: 'CEO & Product Lead',
+    role: 'CTO & Frontend Engineer',
     bio: 'Visionary in fashion tech, passionate about user experience.',
     photo: shammo1,
   },
   {
     name: 'Talal Hussain Rizvi',
-    role: 'CTO & 3D Systems',
+    role: 'CEO & 3D Systems',
     bio: 'Expert in 3D graphics and real-time rendering.',
     photo: Talal,
   },
   {
     name: 'Shahroze Khan',
-    role: 'Head of Design',
+    role: 'COO & Visuals',
     bio: 'UI/UX specialist with a love for elegant interfaces.',
     photo: Shahroze,
   },
   {
-    name: 'Luca Rossi',
-    role: 'Engineering Lead',
+    name: 'Auraina Ijaz',
+    role: 'CFO and Engineer lead',
     bio: 'Full-stack engineer focused on scalable web apps.',
     photo: shammo4,
   },
