@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { GoogleIcon, FacebookIcon } from '../assets/SocialIcons';
 import AvatarCanvas from '../three/AvatarCanvas';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase';
 
 const SignupPage = () => {
@@ -11,16 +11,21 @@ const SignupPage = () => {
     name: '',
     email: '',
     password: '',
-    measurements: '',
   });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Integrate with authentication backend
+    try {
+      await createUserWithEmailAndPassword(auth, form.email, form.password);
+      // Redirect to home page after successful signup
+      navigate('/');
+    } catch (error) {
+      alert('Sign up failed: ' + error.message);
+    }
   };
 
   // Handle Google signup with redirect
@@ -74,14 +79,6 @@ const SignupPage = () => {
             className="border border-gray-700 bg-gray-900 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
             required
           />
-          <input
-            type="text"
-            name="measurements"
-            placeholder="Body Measurements (optional)"
-            value={form.measurements}
-            onChange={handleChange}
-            className="border border-gray-700 bg-gray-900 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-          />
           <button
             type="submit"
             className="bg-primary text-white py-2 rounded-lg font-semibold hover:bg-primary/80 transition"
@@ -104,7 +101,7 @@ const SignupPage = () => {
             <FacebookIcon className="w-5 h-5" /> Sign up with Facebook
           </button>
           <div className="text-sm text-center mt-2 text-gray-300">
-            Already have an account? <Link to="/login" className="text-primary hover:underline">Log in</Link>
+            Already have an account? <Link to="/login"><button className="text-primary hover:underline font-semibold">Log in</button></Link>
           </div>
         </form>
       </div>

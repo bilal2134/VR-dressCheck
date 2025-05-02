@@ -1,26 +1,26 @@
 import shammo1 from '../assets/shammo1.png';
-import shammo2 from '../assets/shammo2.png';
-import shammo3 from '../assets/shammo3.png';
 import shammo4 from '../assets/shammo4.png';
+import Talal from '../assets/Talal.png';
+import Shahroze from '../assets/Shahroze.png';
 
 const team = [
   {
-    name: 'Emily Chen',
+    name: 'Shahmeer Ahmed',
     role: 'CEO & Product Lead',
     bio: 'Visionary in fashion tech, passionate about user experience.',
     photo: shammo1,
   },
   {
-    name: 'Raj Patel',
+    name: 'Talal Hussain Rizvi',
     role: 'CTO & 3D Systems',
     bio: 'Expert in 3D graphics and real-time rendering.',
-    photo: shammo2,
+    photo: Talal,
   },
   {
-    name: 'Sara Kim',
+    name: 'Shahroze Khan',
     role: 'Head of Design',
     bio: 'UI/UX specialist with a love for elegant interfaces.',
-    photo: shammo3,
+    photo: Shahroze,
   },
   {
     name: 'Luca Rossi',

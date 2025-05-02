@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { GoogleIcon, FacebookIcon } from '../assets/SocialIcons';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase';
 
 const LoginPage = () => {
@@ -17,9 +17,15 @@ const LoginPage = () => {
     setForm({ ...form, [name]: type === 'checkbox' ? checked : value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Integrate with authentication backend
+    try {
+      await signInWithEmailAndPassword(auth, form.email, form.password);
+      // Redirect to home page after successful login
+      navigate('/');
+    } catch (error) {
+      alert('Login failed: ' + error.message);
+    }
   };
 
   // Modified function for Google login with redirect
@@ -87,7 +93,7 @@ const LoginPage = () => {
             <FacebookIcon className="w-5 h-5" /> Log in with Facebook
           </button>
           <div className="text-sm text-center mt-2 text-gray-300">
-            Don&apos;t have an account? <Link to="/signup" className="text-primary hover:underline">Sign up</Link>
+            Don&apos;t have an account? <Link to="/signup"><button className="text-primary hover:underline font-semibold">Sign up</button></Link>
           </div>
         </form>
       </div>
